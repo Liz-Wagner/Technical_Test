@@ -1,6 +1,6 @@
 1. Fork and clone the repo
 
-2. Run 'cp .env.sample'
+2. Run 'cp .env.sample .env'
 
 3. Update .env file with "https://api.github.com/repos/twbs/bootstrap/releases" into "url"
 
@@ -9,4 +9,6 @@
 
 5. Run "npm start" in terminal to create the csv file
 
-I realize this may be over kill given the directions, but I wanted to show more of my experience in dealing with api calls.
+6. Run "npm test" to run tests
+
+I realize this may be over kill given the directions, but I wanted to show more of my experience in dealing with api calls and testing.
