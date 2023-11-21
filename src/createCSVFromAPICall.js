@@ -31,7 +31,7 @@ async function convertJSONBootstrapDataToCSV() {
     `Created Date, Tag Name, Zip URL\n` //CSV column names
     );
 
-    await fs.writeFile("bootstrap_release_info.csv", dataCsv, "utf8")
+    fs.writeFile("bootstrap_release_info.csv", dataCsv, "utf8")
         .then(() =>console.log('Data written to bootstrap_release_info.csv'))    
         .catch((error) => console.error('Error writing to file:', err))
     }
