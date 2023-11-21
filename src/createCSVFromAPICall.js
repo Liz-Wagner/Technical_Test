@@ -16,7 +16,7 @@ async function fetchBootstapReleaseInfo() {
             zipball_url: info.zipball_url
         }));
     } catch (error) {
-        console.error("Error fetching data:", error.message)
+        console.error(`Error fetching data: ${error.message}`)
         return null;
     }
 }
@@ -30,8 +30,9 @@ async function convertJSONBootstrapDataToCSV() {
     },
     `Created Date, Tag Name, Zip URL\n` //CSV column names
     );
+    console.log("csv", dataCsv)
 
-    fs.writeFile("bootstrap_release_info.csv", dataCsv, "utf8")
+    await fs.writeFile("bootstrap_release_info.csv", dataCsv, "utf8")
         .then(() =>console.log('Data written to bootstrap_release_info.csv'))    
         .catch((error) => console.error('Error writing to file:', err))
     }

@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { fetchBootstapReleaseInfo, convertJSONBootstrapDataToCSV } = require("../src/createCSVFromAPICall");
 
+
 const githubUrl = process.env.Bootstrap_GitHub_API_URL
 
 describe("src/createCSVFromAPICall", () => {
@@ -30,7 +31,7 @@ describe("src/createCSVFromAPICall", () => {
             await fetchBootstapReleaseInfo();
             const expectedURL = githubUrl
             expect(axios.get).toHaveBeenCalledWith(expectedURL);
-        })
+        });
 
         it("should resolve with an object containing release data", async () => {
             axios.get.mockImplementation(() => Promise.resolve({ data: releaseData }));
@@ -39,5 +40,16 @@ describe("src/createCSVFromAPICall", () => {
 
             expect(response).toEqual(releaseData)
         });
-    })
+
+        it("should log an error to the console", async () => {
+            axios.get.mockImplementation(() =>
+                Promise.reject(new Error("GET request failed."))
+            );
+            jest.spyOn(console, "error");
+
+            await fetchBootstapReleaseInfo();
+
+            expect(console.error).toHaveBeenCalledWith("Error fetching data: GET request failed.");
+        });
+    });
 })
